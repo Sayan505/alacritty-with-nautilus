@@ -72,15 +72,15 @@ class OpenAlacrittyExtension(GObject.GObject, Nautilus.MenuProvider):
             if file_.get_uri_scheme() in REMOTE_URI_SCHEME:
                 uri = _checkdecode(file_.get_uri())
                 item = Nautilus.MenuItem(name='NautilusPython::open_remote_item',
-                                         label=_(u'Open Remote Alacritty'),
-                                         tip=_(u'Open Remote Alacritty In {}').format(uri))
+                                         label=_(u'Open in Remote Terminal'),
+                                         tip=_(u'Open Remote Terminal In {}').format(uri))
                 item.connect('activate', self._menu_activate_cb, file_)
                 items.append(item)
 
             filename = _checkdecode(file_.get_name())
             item = Nautilus.MenuItem(name='NautilusPython::open_file_item',
-                                     label=_(u'Open In Alacritty'),
-                                     tip=_(u'Open Alacritty In {}').format(filename))
+                                     label=_(u'Open in Terminal'),
+                                     tip=_(u'Open Terminal in {}').format(filename))
             item.connect('activate', self._menu_activate_cb, file_)
             items.append(item)
 
@@ -90,14 +90,14 @@ class OpenAlacrittyExtension(GObject.GObject, Nautilus.MenuProvider):
         items = []
         if file_.get_uri_scheme() in REMOTE_URI_SCHEME:
             item = Nautilus.MenuItem(name='NautilusPython::open_bg_remote_item',
-                                     label=_(u'Open Remote Alacritty Here'),
-                                     tip=_(u'Open Remote Alacritty In This Directory'))
+                                     label=_(u'Open in Remote Terminal'),
+                                     tip=_(u'Open Remote Terminal in this directory'))
             item.connect('activate', self._menu_activate_cb, file_)
             items.append(item)
 
         item = Nautilus.MenuItem(name='NautilusPython::open_bg_file_item',
-                                 label=_(u'Open Alacritty Here'),
-                                 tip=_(u'Open Alacritty In This Directory'))
+                                 label=_(u'Open in Terminal'),
+                                 tip=_(u'Open Terminal in this directory'))
         item.connect('activate', self._menu_background_activate_cb, file_)
         items.append(item)
         return items
