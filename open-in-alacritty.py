@@ -13,8 +13,8 @@ except ImportError:
 
 
 from gi import require_version
-require_version('Gtk', '3.0')
-require_version('Nautilus', '3.0')
+require_version('Gtk', '4.0')
+require_version('Nautilus', '4.0')
 from gi.repository import Gio, GObject, Gtk, Nautilus
 
 
@@ -62,7 +62,9 @@ class OpenAlacrittyExtension(GObject.GObject, Nautilus.MenuProvider):
     def _menu_background_activate_cb(self, menu, file_):
         self._open_terminal(file_)
 
-    def get_file_items(self, window, files):
+    def get_file_items(self, *args):
+        files = args[-1]
+
         if len(files) != 1:
             return
         items = []
@@ -86,7 +88,9 @@ class OpenAlacrittyExtension(GObject.GObject, Nautilus.MenuProvider):
 
         return items
 
-    def get_background_items(self, window, file_):
+    def get_background_items(self, *args):
+        file_ = args[-1]
+
         items = []
         if file_.get_uri_scheme() in REMOTE_URI_SCHEME:
             item = Nautilus.MenuItem(name='NautilusPython::open_bg_remote_item',
